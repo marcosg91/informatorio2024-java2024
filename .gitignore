@@ -5,4 +5,6 @@
 #archivos de compilacion
 out
 
-*.class //* significa x archivo.class 
+*.class
+
+#* significa x archivo.class
