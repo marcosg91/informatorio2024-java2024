@@ -1,0 +1,10 @@
+
+#archivos de idea
+.idea
+
+#archivos de compilacion
+out
+
+*.class
+
+#* significa x archivo.class
