@@ -1,0 +1,5 @@
+ar\com\eventos\App.class
+ar\com\eventos\domain\Chef.class
+ar\com\eventos\domain\Participante.class
+ar\com\eventos\domain\EventoGastronomico.class
+ar\com\eventos\domain\Resena.class

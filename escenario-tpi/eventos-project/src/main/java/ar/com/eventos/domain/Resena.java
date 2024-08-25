@@ -1,2 +1,4 @@
-package ar.com.eventos.domain;public class Resena {
+package ar.com.eventos.domain;
+
+public class Resena {
 }

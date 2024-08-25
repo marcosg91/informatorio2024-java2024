@@ -1,2 +1,4 @@
-package ar.com.eventos.domain;public class Participante {
+package ar.com.eventos.domain;
+
+public class Participante {
 }

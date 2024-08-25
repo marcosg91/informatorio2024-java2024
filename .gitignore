@@ -1,4 +1,3 @@
-
 #archivos de idea
 .idea
 
@@ -7,4 +6,5 @@ out
 
 *.class
 
-#* significa x archivo.class
+# Ignorar carpeta target
+/target/
