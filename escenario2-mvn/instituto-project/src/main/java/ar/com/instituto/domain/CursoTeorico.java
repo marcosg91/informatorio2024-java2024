@@ -1,6 +1,7 @@
-package escenario2.dominio;
+package ar.com.instituto.domain;
 
-import escenario2.enumeration.ModalidadEnum;
+
+import ar.com.instituto.enumeration.ModalidadEnum;
 
 public class CursoTeorico extends Curso {
     private ModalidadEnum modalidad;

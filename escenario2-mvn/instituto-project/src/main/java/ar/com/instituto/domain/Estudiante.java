@@ -1,4 +1,4 @@
-package escenario2.dominio;
+package ar.com.instituto.domain;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
-package escenario2.dominio;
+package ar.com.instituto.domain;
 
-import escenario2.enumeration.ComplejidadEnum;
+import ar.com.instituto.enumeration.ComplejidadEnum;
 
 import java.util.*;
 

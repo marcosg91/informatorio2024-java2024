@@ -1,0 +1,10 @@
+ar\com\instituto\domain\Estudiante.class
+ar\com\instituto\domain\Examen.class
+ar\com\instituto\domain\Institucion.class
+ar\com\instituto\enumeration\ComplejidadEnum.class
+ar\com\instituto\domain\Recursos.class
+ar\com\instituto\enumeration\ModalidadEnum.class
+ar\com\instituto\domain\Curso.class
+ar\com\instituto\domain\CursoPractico.class
+ar\com\instituto\App.class
+ar\com\instituto\domain\CursoTeorico.class
