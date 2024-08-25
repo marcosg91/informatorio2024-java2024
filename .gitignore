@@ -1,10 +1,9 @@
-
-#archivos de idea
+# Archivos de idea
 .idea
 
-#archivos de compilacion
+# Archivos de compilación
 out
-
 *.class
 
-#* significa x archivo.class
+# Carpeta de compilación de Maven
+target/

@@ -1,11 +1,38 @@
-iniciar un proyecyo maven: 
+1) crear la carpeta del proyecto
+
+dentro de la carpeta, ejecutar una terminal:
+
+2) iniciar un proyecyo maven: 
 mvn archetype:generate -Dfilter=maven-archetype-quickstart
 
+3) por default: opcion 3
+
+4) por default: siempre la ultima opcion
+
+5) groupID= nombre del proyecto: ar.com.nombreproyecto
+
+6) artifactId= nombreproyecto-project
+
+7) version= pasar Enter
+
+8) package= definir como se va a llamar el paquete cuando se realice la compilacion
+
+9) correr el archivo App.java
+
+10) target no se sube al repositorio 
+
+11) ejecutar ls para saber donde estamos parados
+
+12) ejecutar cd . para posicionarnos en la carpeta \nombreproyecto-project\
+
+13) ejecutar mvn clean
+
+pruebas:
 compilar: mvn compile 
-(y se genera el target)
+(genera el target)
+crear package: mvn clean package
+(genera el archivo .jar)
 
-generar el package: mvn package
 
-limpiar: mvn clean
 
 hacer el tp desde la aplicacion maven.
