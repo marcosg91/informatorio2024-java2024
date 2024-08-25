@@ -1,4 +1,4 @@
 package ar.com.eventos.domain;
 
-public class Chef {
+public class Cheff {
 }

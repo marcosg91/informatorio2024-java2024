@@ -1,4 +1,2 @@
-package ar.com.eventos.domain;
-
-public class EventoGastronomico {
+package ar.com.eventos.domain;public class EventoGastronomico {
 }
