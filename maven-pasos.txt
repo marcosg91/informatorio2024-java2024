@@ -15,7 +15,7 @@ mvn archetype:generate -Dfilter=maven-archetype-quickstart
 
 7) version= pasar Enter
 
-8) package= definir como se va a llamar el paquete cuando se realice la compilacion
+8) package= definir como se va a llamar el paquete cuando se realice la compilacion ar.com.nombreproyecto
 
 9) correr el archivo App.java
 
