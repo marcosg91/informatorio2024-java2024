@@ -37,6 +37,7 @@ public class Usuario {
     //relaciones:
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Proyecto proyecto;
 
 }
