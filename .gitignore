@@ -8,3 +8,8 @@ out
 *.class
 
 #* significa x archivo.class
+
+# Ignorar las carpetas escenario-tpi y escenario2-mvn
+escenario-tpi/
+escenario2-mvn/
+
