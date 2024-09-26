@@ -17,6 +17,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+
 public class Usuario {
     @Id
     @GeneratedValue(generator = "UUID")
