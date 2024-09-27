@@ -2,6 +2,7 @@ package ar.com.evento.service.eventogastronomico.impl;
 
 import ar.com.evento.domain.Chef;
 import ar.com.evento.domain.EventoGastronomico;
+import ar.com.evento.service.chef.impl.ChefServiceImpl;
 import ar.com.evento.service.eventogastronomico.EventoGastronomicoService;
 
 import java.time.LocalDateTime;
@@ -13,10 +14,11 @@ import java.util.UUID;
 
 public class EventoGastronomicoServiceImpl implements EventoGastronomicoService {
 
-    private List<EventoGastronomico> eventosDisponibles = new ArrayList<>();
+    private final List<EventoGastronomico> eventosDisponibles = new ArrayList<>();
+    private final ChefServiceImpl chefService = new ChefServiceImpl();  // Asumimos que tienes una instancia de ChefServiceImpl
 
     @Override
-    public EventoGastronomico crearEvento(Scanner scanner, List<Chef> chefsDisponibles) {
+    public void crearEvento(Scanner scanner, List<Chef> chefsDisponibles) {
         System.out.print("Ingrese el nombre del evento: ");
         String nombre = scanner.nextLine();
 
@@ -33,16 +35,15 @@ public class EventoGastronomicoServiceImpl implements EventoGastronomicoService 
         for (Chef chef : chefsDisponibles) {
             System.out.println(chef.getIdChef() + ": " + chef.getNombre() + " (" + chef.getEspecialidad() + ")");
         }
+
+        System.out.print("Ingrese el ID del chef: ");
         UUID idChef = UUID.fromString(scanner.nextLine());
 
-        Chef chefSeleccionado = chefsDisponibles.stream()
-                .filter(chef -> chef.getIdChef().equals(idChef))
-                .findFirst()
-                .orElse(null);
+        Chef chefSeleccionado = chefService.buscarChefPorId(idChef);
 
         if (chefSeleccionado == null) {
             System.out.println("ID de chef no válido.");
-            return null;
+            return;
         }
 
         System.out.print("Ingrese el cupo máximo de participantes: ");
@@ -51,7 +52,6 @@ public class EventoGastronomicoServiceImpl implements EventoGastronomicoService 
 
         EventoGastronomico nuevoEvento = new EventoGastronomico(UUID.randomUUID(), nombre, descripcion, fechaHora, ubicacion, chefSeleccionado, cupoMaximo);
         eventosDisponibles.add(nuevoEvento);
-        return nuevoEvento;
     }
 
     @Override
@@ -90,5 +90,13 @@ public class EventoGastronomicoServiceImpl implements EventoGastronomicoService 
     @Override
     public List<EventoGastronomico> listarEventos() {
         return eventosDisponibles;
+    }
+
+    // Nuevo método para buscar un evento por ID
+    public EventoGastronomico buscarEventoPorId(UUID idEvento) {
+        return eventosDisponibles.stream()
+                .filter(evento -> evento.getIdEvento().equals(idEvento))
+                .findFirst()
+                .orElse(null);
     }
 }

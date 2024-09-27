@@ -3,12 +3,19 @@ package ar.com.evento.service.resena.impl;
 import ar.com.evento.domain.EventoGastronomico;
 import ar.com.evento.domain.Participante;
 import ar.com.evento.domain.Resena;
+import ar.com.evento.service.eventogastronomico.EventoGastronomicoService;
 import ar.com.evento.service.resena.ResenaService;
 
 import java.util.Scanner;
 import java.util.UUID;
 
 public class ResenaServiceImpl implements ResenaService {
+
+    private final EventoGastronomicoService eventoGastronomicoService;
+
+    public ResenaServiceImpl(EventoGastronomicoService eventoGastronomicoService) {
+        this.eventoGastronomicoService = eventoGastronomicoService;
+    }
 
     @Override
     public Resena nuevaResena(Scanner scanner, Participante participante) {
@@ -21,15 +28,19 @@ public class ResenaServiceImpl implements ResenaService {
         for (EventoGastronomico evento : participante.getHistorialEventos()) {
             System.out.println(evento.getIdEvento() + ": " + evento.getNombre());
         }
-        UUID idEvento = UUID.fromString(scanner.nextLine());  // Cambiado a UUID
 
-        EventoGastronomico eventoSeleccionado = participante.getHistorialEventos().stream()
-                .filter(e -> e.getIdEvento().equals(idEvento))
-                .findFirst()
-                .orElse(null);
+        UUID idEvento = UUID.fromString(scanner.nextLine()); // Cambiado a UUID
+
+        // Usamos el método buscarEventoPorId del servicio de eventos
+        EventoGastronomico eventoSeleccionado = eventoGastronomicoService.buscarEventoPorId(idEvento);
 
         if (eventoSeleccionado == null) {
             System.out.println("ID de evento no válido.");
+            return null;
+        }
+
+        if (!participante.getHistorialEventos().contains(eventoSeleccionado)) {
+            System.out.println("El participante no asistió a este evento.");
             return null;
         }
 
@@ -53,9 +64,8 @@ public class ResenaServiceImpl implements ResenaService {
                 comentario
         );
 
-        eventoSeleccionado.agregarResena(resena);  // Agrega la reseña al evento
+        eventoSeleccionado.agregarResena(resena); // Agrega la reseña al evento
         System.out.println("Reseña añadida al evento: " + eventoSeleccionado.getNombre());
         return resena;
     }
 }
-

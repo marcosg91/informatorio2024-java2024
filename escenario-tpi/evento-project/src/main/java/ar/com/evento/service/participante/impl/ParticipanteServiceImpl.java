@@ -3,9 +3,9 @@ package ar.com.evento.service.participante.impl;
 import ar.com.evento.domain.EventoGastronomico;
 import ar.com.evento.domain.Participante;
 import ar.com.evento.domain.Resena;
+import ar.com.evento.service.eventogastronomico.EventoGastronomicoService;
 import ar.com.evento.service.participante.ParticipanteService;
 import ar.com.evento.service.resena.ResenaService;
-import ar.com.evento.service.resena.impl.ResenaServiceImpl;
 
 import java.util.List;
 import java.util.Scanner;
@@ -14,7 +14,13 @@ import java.util.UUID;
 public class ParticipanteServiceImpl implements ParticipanteService {
 
     private Participante participanteActual;
-    private ResenaService resenaService = new ResenaServiceImpl();
+    private ResenaService resenaService;
+    private EventoGastronomicoService eventoService;
+
+    public ParticipanteServiceImpl(EventoGastronomicoService eventoService, ResenaService resenaService) {
+        this.eventoService = eventoService;
+        this.resenaService = resenaService;
+    }
 
     @Override
     public Participante crearParticipante(Scanner scanner) {
@@ -39,12 +45,12 @@ public class ParticipanteServiceImpl implements ParticipanteService {
         }
 
         System.out.println("Ingrese el ID del evento en el que desea inscribir al participante:");
-        String idEvento = scanner.nextLine();
+        String idEventoStr = scanner.nextLine();
 
-        EventoGastronomico eventoSeleccionado = eventosDisponibles.stream()
-                .filter(e -> e.getIdEvento().equals(idEvento))
-                .findFirst()
-                .orElse(null);
+        UUID idEvento = UUID.fromString(idEventoStr);
+
+        // Usamos el método buscarEventoPorId del servicio de eventos
+        EventoGastronomico eventoSeleccionado = eventoService.buscarEventoPorId(idEvento);
 
         if (eventoSeleccionado == null) {
             System.out.println("ID de evento no válido.");

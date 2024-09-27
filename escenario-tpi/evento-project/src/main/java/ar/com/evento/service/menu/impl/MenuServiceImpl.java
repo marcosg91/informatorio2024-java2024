@@ -7,6 +7,7 @@ import ar.com.evento.service.chef.ChefService;
 import ar.com.evento.service.eventogastronomico.EventoGastronomicoService;
 import ar.com.evento.service.menu.MenuService;
 import ar.com.evento.service.participante.ParticipanteService;
+import ar.com.evento.service.resena.ResenaService;
 import ar.com.evento.domain.Participante;
 
 import java.util.Scanner;
@@ -17,12 +18,18 @@ public class MenuServiceImpl implements MenuService {
     private final ChefService chefService;
     private final ParticipanteService participanteService;
     private final ArchivosEventosService archivosEventosService;
+    private final ResenaService resenaService;
 
-    public MenuServiceImpl(EventoGastronomicoService eventoGastronomicoService, ChefService chefService, ParticipanteService participanteService, ArchivosEventosService archivosEventosService) {
+    public MenuServiceImpl(EventoGastronomicoService eventoGastronomicoService,
+                           ChefService chefService,
+                           ParticipanteService participanteService,
+                           ArchivosEventosService archivosEventosService,
+                           ResenaService resenaService) {
         this.eventoGastronomicoService = eventoGastronomicoService;
         this.chefService = chefService;
         this.participanteService = participanteService;
         this.archivosEventosService = archivosEventosService;
+        this.resenaService = resenaService;
     }
 
     @Override
@@ -93,6 +100,7 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public void mostrarMenuParticipante(Scanner scanner) {
         boolean volver = false;
+        Participante nuevoParticipante = null;
 
         while (!volver) {
             System.out.println("\nMenú Participante");
@@ -105,14 +113,18 @@ public class MenuServiceImpl implements MenuService {
 
             switch (opcion) {
                 case 1:
-                    Participante nuevoParticipante = participanteService.crearParticipante(scanner);
+                    nuevoParticipante = participanteService.crearParticipante(scanner);
                     System.out.println("Participante creado: " + nuevoParticipante.getNombre() + " " + nuevoParticipante.getApellido() + " con ID: " + nuevoParticipante.getIdParticipante());
                     break;
                 case 2:
                     participanteService.inscribirseEnEvento(scanner, eventoGastronomicoService.listarEventos());
                     break;
                 case 3:
-                    participanteService.dejarResena(scanner);
+                    if (nuevoParticipante != null) {
+                        resenaService.nuevaResena(scanner, nuevoParticipante);
+                    } else {
+                        System.out.println("Debes crear un participante primero para dejar una reseña.");
+                    }
                     break;
                 case 4:
                     volver = true;

@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public class ChefServiceImpl implements ChefService {
 
-    private List<Chef> chefsDisponibles = new ArrayList<>();
+    private final List<Chef> chefsDisponibles = new ArrayList<>();
 
     @Override
     public Chef agregarChef(Scanner scanner) {
@@ -67,5 +67,13 @@ public class ChefServiceImpl implements ChefService {
     @Override
     public List<Chef> listarChefs() {
         return new ArrayList<>(chefsDisponibles);
+    }
+
+    // Nuevo método para buscar un chef por ID
+    public Chef buscarChefPorId(UUID idChef) {
+        return chefsDisponibles.stream()
+                .filter(chef -> chef.getIdChef().equals(idChef))
+                .findFirst()
+                .orElse(null);
     }
 }
