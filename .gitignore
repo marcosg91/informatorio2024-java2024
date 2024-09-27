@@ -7,3 +7,5 @@ out
 
 # Carpeta de compilación de Maven
 target/
+
+spring/
