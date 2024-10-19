@@ -8,6 +8,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,7 +17,9 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 public class Proyecto {
+
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
@@ -30,27 +33,24 @@ public class Proyecto {
     @Column(nullable = false)
     private LocalDate fechaInicio;
 
-    @Column(nullable = false)
     private LocalDate fechaFin;
 
-    //relaciones:
-
     @OneToOne
-    @JoinColumn(name = "lider_id", nullable = false)
+    @JoinColumn(name = "lider_id")
     private Usuario lider;
 
     @OneToMany(mappedBy = "proyecto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Usuario> colaboradores;
+    private List<Usuario> colaboradores = new ArrayList<>();
 
-    @OneToMany(mappedBy = "proyecto", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private List<Tarea> tareas;
+    @OneToMany(mappedBy = "proyecto", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER )
+    private List<Tarea> tarea = new ArrayList<>();
 
     public void setUsuarioByRol(Usuario usuario){
-        if (RolEnum.LIDER.equals( usuario.getRol() ) ) {
-            this.setLider(usuario);
 
-        }else{
-            this.getColaboradores().add(usuario);
+        if ( RolEnum.LIDER.equals( usuario.getRol() ) ){
+            this.setLider( usuario );
+        }else {
+            this.getColaboradores().add( usuario );
         }
 
     }
