@@ -9,6 +9,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,7 +21,7 @@ import java.util.UUID;
 public class Ingrediente {
     @Id
     @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator" )
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @JdbcTypeCode(SqlTypes.CHAR)
     @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
     private UUID id;
@@ -32,6 +33,20 @@ public class Ingrediente {
     private String descripcion;
 
     @ManyToMany(mappedBy = "ingredientes")
-    private List<Paso> pasos;
+    private List<Paso> pasos = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "receta_id")
+    private Receta receta;
+
+    public void addPaso(Paso paso) {
+        this.pasos.add(paso);
+        paso.getIngredientes().add(this);
+    }
+
+    public Ingrediente(UUID id, String nombre, String descripcion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
 }

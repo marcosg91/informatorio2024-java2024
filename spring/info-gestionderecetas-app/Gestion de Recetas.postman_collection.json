@@ -1,0 +1,187 @@
+{
+	"info": {
+		"_postman_id": "3759822c-6266-41a0-8322-54ca7a69944e",
+		"name": "Gestion de Recetas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28120267"
+	},
+	"item": [
+		{
+			"name": "nueva categoria",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Postres\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/categorias",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"categorias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listar categorias",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "nueva receta",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Receta de prueba\",\r\n  \"idCategoria\": \"dbd6ac11-3a0b-44f6-8131-c857be1526b6\",\r\n  \"pasos\": []\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/recetas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"recetas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listar recetas por categoria",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "buscar receta",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/recetas/bc0c7038-f438-437c-ae6f-cbe5c62d4b4a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"recetas",
+						"bc0c7038-f438-437c-ae6f-cbe5c62d4b4a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listar ingredientes de una receta",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/ingredientes/recetas/17ee74ac-124f-4ca1-bd4c-f162a995e535",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"ingredientes",
+						"recetas",
+						"17ee74ac-124f-4ca1-bd4c-f162a995e535"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listar ingredientes de paso",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "actualizar un paso",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"descripcion\": \"Mezclar los ingredientes con una batidora\",\r\n    \"tiempoEstimado\": 15,\r\n    \"esOpcional\": false\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/recetas/e9a545e9-ee0c-4baf-acda-2401c5fda0a2/pasos/bf11cd2a-f550-4fce-b4c0-148e08ba67ec",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"recetas",
+						"e9a545e9-ee0c-4baf-acda-2401c5fda0a2",
+						"pasos",
+						"bf11cd2a-f550-4fce-b4c0-148e08ba67ec"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "eliminar receta",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/recetas/2cded0e3-6a85-4641-b517-81300f19f71a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"recetas",
+						"2cded0e3-6a85-4641-b517-81300f19f71a"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

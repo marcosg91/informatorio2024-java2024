@@ -6,9 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,26 +20,36 @@ public class Paso {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @JdbcTypeCode(SqlTypes.CHAR)
-    @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
     private UUID id;
 
-    @Column(length = 5000)
     private String descripcion;
 
-    private Integer tiempoEstimado;
+    private Integer tiempo;
 
-    private Boolean esOpcional;
+    private boolean esOpcional;
+
+    @ManyToOne
+    @JoinColumn(name = "receta_id", nullable = false)
+    private Receta receta;
 
     @ManyToMany
     @JoinTable(
             name = "paso_ingrediente",
             joinColumns = @JoinColumn(name = "paso_id"),
-            inverseJoinColumns = @JoinColumn(name = "ingrediente_id"))
-    private List<Ingrediente> ingredientes;
+            inverseJoinColumns = @JoinColumn(name = "ingrediente_id")
+    )
+    private List<Ingrediente> ingredientes = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "receta_id")
-    private Receta receta;
+    public Paso(UUID id, String descripcion, int tiempo, boolean esOpcional, Receta receta) {
+        this.id = id;
+        this.descripcion = descripcion;
+        this.tiempo = tiempo;
+        this.esOpcional = esOpcional;
+        this.receta = receta;
+    }
 
+    public void addIngrediente(Ingrediente ingrediente) {
+        this.ingredientes.add(ingrediente);
+        ingrediente.getPasos().add(this);
+    }
 }
